@@ -1,0 +1,27 @@
+foamGet residuals
+Enter 1
+
+Edit /system/residuals file: Enter fields (p U nut nuTilda);
+
+Edit system/controlDict file: 
+Add the following:
+//////
+functions
+{
+#includeFunc residuals
+}
+
+Method #1: 
+a) Simply type the <solvername> 
+b) foamMonitor -l ./postProcessing/residuals/0/residuals.
+c) /postProcessing/residuals/0/residuals.dat file
+
+Method #2:
+a) pyFoamPlotRunner.py <solvername>
+
+Method #3:
+a) <solvername> >&logFile
+b) pyFoamPlotWatcher.py logFile
+c) pyFoamPlotWatcher.py logFile --hardcopy --format-of-hardcopy=png
+
+
