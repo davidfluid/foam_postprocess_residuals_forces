@@ -24,4 +24,28 @@ a) <solvername> >&logFile
 b) pyFoamPlotWatcher.py logFile
 c) pyFoamPlotWatcher.py logFile --hardcopy --format-of-hardcopy=png
 
+/////////////////// Plot forces /////////////////
+Add the following porition of the code to the system/controlDict file to get the forces plotted:
 
+//Added for force output.
+libs
+(
+    "libforces.so"
+);
+
+functions
+{
+    airfoil
+    {
+        patches             (walls);
+        CofR                (0 0 0);
+        outputControl 		timeStep;
+        outputInterval 		5;
+        type 				forces;
+        pName 				p;
+        UName 				U;
+        rhoName 			rhoInf;
+        rhoInf 				1.18;
+        log 				true;
+    }
+}
